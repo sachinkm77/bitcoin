@@ -27,6 +27,7 @@ if test "x${ARFLAGS+set}" != "xset"; then
 fi
 
 AC_CANONICAL_HOST
+AC_CANONICAL_BUILD
 
 AH_TOP([#ifndef BITCOIN_CONFIG_H])
 AH_TOP([#define BITCOIN_CONFIG_H])
@@ -1730,6 +1731,17 @@ case ${OS} in
    ;;
 esac
 
+case $build in
+   *mingw*)
+      OS_BUILD=windows 
+   ;;
+esac
+case $build in
+   *linux*)
+      OS_BUILD=linux
+   ;;
+esac
+
 echo
 echo "Options used to compile and link:"
 echo "  multiprocess  = $build_multiprocess"
@@ -1752,7 +1764,7 @@ echo "  gprof enabled = $enable_gprof"
 echo "  werror        = $enable_werror"
 echo
 echo "  target os     = $TARGET_OS"
-echo "  build os      = $BUILD_OS"
+echo "  build os      = $OS_BUILD"
 echo
 echo "  CC            = $CC"
 echo "  CFLAGS        = $CFLAGS"
